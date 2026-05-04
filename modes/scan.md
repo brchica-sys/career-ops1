@@ -107,6 +107,15 @@ Los niveles son aditivos — se ejecutan todos, los resultados se mezclan y dedu
 
    **No interrumpir el scan entero si una URL falla.** Si `browser_navigate` da error (timeout, 403, etc.), marcar como `skipped_expired` y continuar con la siguiente.
 
+
+7.6. **Filtro de frescura temporal (MANDATORIO si el usuario lo pide)**:
+
+   Si el usuario pide "solo ofertas recientes" (ej. últimas 2 semanas):
+   a. En búsquedas WebSearch, usar `recency` explícito (ej. 14 días)
+   b. Intentar extraer fecha de publicación desde snippet, metadata o página destino
+   c. Si la fecha publicada es mayor al umbral, registrar en `scan-history.tsv` con `skipped_stale` y descartar
+   d. Si no hay fecha visible, marcar como `needs_date_check` en notas y mantener fuera de pipeline hasta validación manual
+
 8. **Para cada oferta nueva verificada que pase filtros**:
    a. Añadir a `pipeline.md` sección "Pendientes": `- [ ] {url} | {company} | {title}`
    b. Registrar en `scan-history.tsv`: `{url}\t{date}\t{query_name}\t{title}\t{company}\tadded`

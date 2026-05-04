@@ -63,3 +63,16 @@ npm run verify
 # optional dashboard build
 cd dashboard && go build ./...
 ```
+
+## Optional: Daily scan automation (7:00 PM local time)
+
+If you want automatic daily discovery, add a cron entry that runs at **7:00 PM**:
+
+```bash
+0 19 * * * cd /workspace/career-ops1 && /usr/bin/env node update-system.mjs check >/tmp/career_ops_update.log 2>&1 && /usr/bin/env npx -y @anthropic-ai/claude-code /career-ops-scan >/tmp/career_ops_scan.log 2>&1
+```
+
+Notes:
+- Adjust the repo path if your checkout lives elsewhere.
+- Cron uses the host timezone unless explicitly configured.
+- Keep `portals.yml` tuned with your freshness and title filters for best results.

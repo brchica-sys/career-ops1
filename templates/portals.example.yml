@@ -19,6 +19,11 @@
 # The scanner uses these keywords to decide if a title is relevant.
 # At least 1 positive must match AND 0 negatives must match (case-insensitive).
 
+freshness:
+  # Optional hard freshness window for discovery-only scans
+  # If enabled, agent should only keep roles posted within this window.
+  enforce_posted_within_days: 14
+
 title_filter:
   positive:
     # [CUSTOMIZE] Add keywords matching YOUR target roles
@@ -54,6 +59,9 @@ title_filter:
     # -- Product roles --
     - "Product Manager"
     - "Technical PM"
+    - "Asset Management"
+    - "Capital Markets"
+    - "Investment Banking"
     # -- Automation roles --
     - "Automation"
     - "Hyperautomation"
@@ -142,6 +150,20 @@ search_queries:
   # -- Wellfound (startups) --
   - name: Wellfound — AI PM
     query: 'site:wellfound.com "AI Product Manager" OR "AI Solutions" remote'
+    enabled: true
+
+
+  # -- Finance internships (IB / Capital Markets / Asset Management) --
+  - name: Greenhouse — Finance Internships (Summer 2027)
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io ("Investment Banking Intern" OR "Capital Markets Intern" OR "Asset Management Intern") ("Summer 2027" OR "2027 Internship")'
+    enabled: true
+
+  - name: Lever — Finance Internships (Summer 2027)
+    query: 'site:jobs.lever.co ("Investment Banking Intern" OR "Capital Markets Intern" OR "Asset Management Intern") ("Summer 2027" OR "2027 Internship")'
+    enabled: true
+
+  - name: Ashby — Finance Internships (Summer 2027)
+    query: 'site:jobs.ashbyhq.com ("Investment Banking Intern" OR "Capital Markets Intern" OR "Asset Management Intern") ("Summer 2027" OR "2027 Internship")'
     enabled: true
 
   # -- Workable --
